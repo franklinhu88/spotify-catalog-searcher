@@ -1,0 +1,34 @@
+<!-- src/app/components/search-bar/search-bar.component.html -->
+<header>
+  <nav class="navbar">
+    <!-- Logo and Home button -->
+    <div class="logo-and-search">
+      <div class="logo-section">
+        <img
+          src="../../../assets/images/green-note.jpeg"
+          alt="green-note"
+          class="logo-image"
+        />
+      </div>
+
+      <!-- Search bar -->
+      <div class="search-section">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          [(ngModel)]="searchTerm"
+        />
+        <button class="search-button" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+
+    <!-- Other navigation buttons -->
+    <div class="nav-buttons">
+      <button class="nav-button">Home</button>
+      <button class="nav-button">About</button>
+      <button class="nav-button">Services</button>
+      <button class="nav-button">Contact</button>
+    </div>
+  </nav>
+</header>
