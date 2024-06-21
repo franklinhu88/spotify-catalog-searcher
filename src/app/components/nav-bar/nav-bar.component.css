@@ -32,6 +32,9 @@ header {
 .search-section {
   display: flex;
   align-items: center;
+  position: relative; /* Added for dropdown positioning */
+  width: 100%;
+  margin-left: 100px;
 }
 
 .search-input {
@@ -57,6 +60,15 @@ header {
 
 .search-button:hover {
   background-color: darkgray;
+}
+
+app-search-dropdown {
+  position: absolute;
+  top: calc(
+    100%
+  ); /* Position directly below the input with a small gap */
+  left: 0;
+  width: 86%;
 }
 
 .nav-buttons {

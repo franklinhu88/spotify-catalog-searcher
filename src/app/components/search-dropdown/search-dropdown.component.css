@@ -1,0 +1,26 @@
+.dropdown {
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2px;
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown li:hover {
+  background-color: #333333; /* Slightly lighter shade of black */
+}

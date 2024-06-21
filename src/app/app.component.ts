@@ -22,10 +22,6 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.accessToken = await this.spotifyService.getAccessToken();
-    this.spotifyService.getArtist(this.pracID).subscribe((artist) => {
-      this.artist = artist;
-      console.log(this.artist.name);
-    });
   }
 
   onTrackIdSubmit() {

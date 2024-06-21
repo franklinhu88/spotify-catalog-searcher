@@ -18,17 +18,23 @@
           class="search-input"
           placeholder="Search..."
           [(ngModel)]="searchTerm"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
         />
         <button class="search-button" (click)="onSearch()">Search</button>
+        <app-search-dropdown
+          *ngIf="filteredTracks.length > 0 && isInputFocused"
+          [items]="filteredTracks"
+        ></app-search-dropdown>
       </div>
     </div>
 
     <!-- Other navigation buttons -->
     <div class="nav-buttons">
-      <button class="nav-button">Home</button>
-      <button class="nav-button">About</button>
-      <button class="nav-button">Services</button>
-      <button class="nav-button">Contact</button>
+      <button class="nav-button">Albums</button>
+      <button class="nav-button">Artists</button>
+      <button class="nav-button">Tracks</button>
+      <button class="nav-button">Podcasts</button>
     </div>
   </nav>
 </header>
