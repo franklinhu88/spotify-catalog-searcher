@@ -4,6 +4,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Track } from './models/track.model';
+import { Album } from './models/album.model';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,6 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.accessToken = await this.spotifyService.getAccessToken();
-    // this.testSearchTracks();
   }
 
   onTrackIdSubmit() {
@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
   }
 
   testSearchTracks() {
-    this.spotifyService.searchTracks('Doxy').subscribe(
-      (tracks: Track[]) => {
-        console.log('Search Tracks Result:', tracks);
+    this.spotifyService.getAlbum('1JzjwUKkPsdHg1SQ7qa5hc').subscribe(
+      (album: Album) => {
+        console.log('Search Tracks Result:', album);
       },
       (error) => {
         console.error('Error fetching search tracks:', error);

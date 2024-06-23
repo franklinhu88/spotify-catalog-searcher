@@ -1,5 +1,22 @@
 <div class="dropdown" *ngIf="items.length > 0">
   <ul>
-    <li *ngFor="let item of items">{{ item }}</li>
+    <li *ngFor="let item of items" class="item-container">
+      <div class="album-info">
+        <img
+          *ngIf="item.albumPhoto"
+          [src]="item.albumPhoto"
+          alt="Album Photo"
+          class="album-photo"
+        />
+        <div class="track-info">
+          <strong>{{ item.trackName }}</strong>
+          <br />
+          <span>
+            Artist{{ item.artists.length === 1 ? "" : "s" }}:
+            {{ item.artists.join(", ") }}
+          </span>
+        </div>
+      </div>
+    </li>
   </ul>
 </div>

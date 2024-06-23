@@ -1,10 +1,8 @@
 export interface Artist {
-  name?: string;
-  genres?: string[];
-  followers?: Followers;
-}
-
-export interface Followers {
-  href?: any;
-  total?: number;
+  name: string;
+  followerCount: number;
+  href: string;
+  id: string;
+  imageUrl: string;
+  popularity: number;
 }

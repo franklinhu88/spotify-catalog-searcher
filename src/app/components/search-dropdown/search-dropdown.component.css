@@ -19,8 +19,35 @@
   padding: 10px;
   cursor: pointer;
   color: white;
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items vertically */
 }
 
 .dropdown li:hover {
   background-color: #333333; /* Slightly lighter shade of black */
+}
+
+.album-info {
+  display: flex;
+  align-items: center;
+}
+
+.album-photo {
+  max-width: 100px; /* Adjust photo width */
+  margin-right: 10px; /* Space between photo and track info */
+}
+
+.track-info {
+  flex: 1; /* Take remaining space */
+}
+
+.track-info strong {
+  display: block; /* Ensure track name appears on top */
+  font-size: 1.1em; /* Adjust font size if needed */
+  margin-bottom: 5px; /* Space between track name and artists */
+}
+
+.track-info span {
+  font-size: 0.9em; /* Adjust font size for artists */
+  color: #ccc; /* Lighter color for artists */
 }
