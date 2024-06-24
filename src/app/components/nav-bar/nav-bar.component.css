@@ -64,9 +64,7 @@ header {
 
 app-search-dropdown {
   position: absolute;
-  top: calc(
-    100%
-  ); /* Position directly below the input with a small gap */
+  top: calc(100%); /* Position directly below the input with a small gap */
   left: 0;
   width: 86%;
 }
@@ -88,4 +86,8 @@ app-search-dropdown {
 
 .nav-button:hover {
   background-color: #333;
+}
+
+.nav-button.active {
+  background-color: #555; /* Highlight color for the active button */
 }

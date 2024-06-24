@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Track } from '../../models/track.model';
-import { Album } from '../../models/album.model';
-import { Artist } from '../../models/artist.model';
 import { TrackSearchRow } from '../../models/track.search.model';
 import { SpotifyService } from '../../services/spotify.service';
 import { SearchDropdownComponent } from '../search-dropdown/search-dropdown.component';
@@ -20,6 +17,7 @@ export class NavBarComponent implements OnInit {
   trackList: TrackSearchRow[] = [];
   isInputFocused: boolean = false;
   currentType: string = 'track';
+  activeButton: string = 'track';
 
   constructor(private spotifyService: SpotifyService) {}
 
@@ -33,10 +31,10 @@ export class NavBarComponent implements OnInit {
 
   set searchTerm(value: string) {
     this._searchTerm = value;
-    this.filterTracks();
+    this.filterResults();
   }
 
-  async filterTracks() {
+  async filterResults() {
     // 1. Check if the search term is empty
     if (this._searchTerm.trim() === '') {
       this.trackList = [];
@@ -64,7 +62,7 @@ export class NavBarComponent implements OnInit {
                 return artist?.name ?? '';
               })
             );
-            
+
             console.log(JSON.stringify(album));
             return {
               trackName: track.name,
@@ -89,5 +87,11 @@ export class NavBarComponent implements OnInit {
 
   onBlur() {
     this.isInputFocused = false;
+  }
+
+  setActiveButton(button: string) {
+    this.activeButton = button;
+    this.currentType = button;
+    this.filterResults();
   }
 }

@@ -31,10 +31,27 @@
 
     <!-- Other navigation buttons -->
     <div class="nav-buttons">
-      <button class="nav-button">Albums</button>
-      <button class="nav-button">Artists</button>
-      <button class="nav-button">Tracks</button>
-      <button class="nav-button">Podcasts</button>
+      <button
+        class="nav-button"
+        [class.active]="activeButton === 'album'"
+        (click)="setActiveButton('album')"
+      >
+        Album
+      </button>
+      <button
+        class="nav-button"
+        [class.active]="activeButton === 'artist'"
+        (click)="setActiveButton('artist')"
+      >
+        Artist
+      </button>
+      <button
+        class="nav-button"
+        [class.active]="activeButton === 'track'"
+        (click)="setActiveButton('track')"
+      >
+        Track
+      </button>
     </div>
   </nav>
 </header>
