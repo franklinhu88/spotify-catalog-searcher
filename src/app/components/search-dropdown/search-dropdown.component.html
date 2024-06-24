@@ -3,17 +3,20 @@
     <li *ngFor="let item of items" class="item-container">
       <div class="album-info">
         <img
-          *ngIf="item.albumPhoto"
-          [src]="item.albumPhoto"
+          *ngIf="item.photo"
+          [src]="item.photo"
           alt="Album Photo"
           class="album-photo"
         />
         <div class="track-info">
-          <strong>{{ item.trackName }}</strong>
+          <strong>{{ item.mainText }}</strong>
           <br />
-          <span>
-            Artist{{ item.artists.length === 1 ? "" : "s" }}:
-            {{ item.artists.join(", ") }}
+          <span *ngIf="currentType !== 'artist'">
+            Artist{{ item.subText.length === 1 ? "" : "s" }}:
+            {{ item.subText.join(", ") }}
+          </span>
+          <span *ngIf="currentType === 'artist'">
+            {{ item.subText[0] }} followers
           </span>
         </div>
       </div>

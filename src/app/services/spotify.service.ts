@@ -101,34 +101,61 @@ export class SpotifyService {
     );
   }
 
-  // Search method
   public search(
     query: string,
     type: string,
     limit: number = 10
-  ): Observable<Track[]> {
+  ): Observable<Track[] | Album[] | Artist[]> {
     const url = `${this.apiUrl}v1/search`;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.accessToken}`,
     });
     const params = new HttpParams()
-      .set('q', query)
+      .set('q', `${type}:${query}`)
       .set('type', type)
       .set('limit', limit.toString());
 
     return this.http.get<any>(url, { headers, params }).pipe(
       map((response) => {
-        const items = response.tracks?.items || [];
-        return items.map((item: any) => {
-          return {
-            album: item.album.id,
-            artists: item.artists.map((artist: any) => artist.id),
-            explicit: item.explicit,
-            id: item.id,
-            name: item.name,
-            popularity: item.popularity,
-          } as Track;
-        });
+        if (type === 'track') {
+          const items = response.tracks?.items || [];
+          return items.map((item: any) => {
+            return {
+              album: item.album.id,
+              artists: item.artists.map((artist: any) => artist.id),
+              explicit: item.explicit,
+              id: item.id,
+              name: item.name,
+              popularity: item.popularity,
+            } as Track;
+          });
+        } else if (type === 'album') {
+          const items = response.albums?.items || [];
+          console.log(items);
+          return items
+            .filter((item: any) => item.album_type === 'album')
+            .map((item: any) => {
+              return {
+                id: item.id,
+                imageURL: item.images[0].url ?? '',
+                name: item.name,
+                artists: item.artists.map((artist: any) => artist.id),
+                tracks: item.tracks?.items.map((track: any) => track.id) || [],
+              } as Album;
+            });
+        } else if (type === 'artist') {
+          const items = response.artists?.items || [];
+          return items.map((item: any) => {
+            return {
+              id: item.id,
+              imageUrl: item.images[0]?.url ?? '',
+              name: item.name,
+              followerCount: item.followers.total,
+              href: item.href,
+              popularity: item.popularity,
+            } as Artist;
+          });
+        }
       })
     );
   }

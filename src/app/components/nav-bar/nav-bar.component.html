@@ -23,8 +23,9 @@
         />
         <button class="search-button" (click)="onSearch()">Search</button>
         <app-search-dropdown
-          *ngIf="trackList.length > 0 && isInputFocused"
-          [items]="trackList"
+          *ngIf="searchResult.length > 0 && isInputFocused"
+          [items]="searchResult"
+          [currentType]="currentType"
         ></app-search-dropdown>
       </div>
     </div>

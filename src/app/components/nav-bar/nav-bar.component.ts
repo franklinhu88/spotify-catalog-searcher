@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TrackSearchRow } from '../../models/track.search.model';
+import { SearchRow } from '../../models/search.row.model';
 import { SpotifyService } from '../../services/spotify.service';
 import { SearchDropdownComponent } from '../search-dropdown/search-dropdown.component';
+import { Track } from '../../models/track.model';
+import { Album } from '../../models/album.model';
+import { Artist } from '../../models/artist.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,7 +17,7 @@ import { SearchDropdownComponent } from '../search-dropdown/search-dropdown.comp
 })
 export class NavBarComponent implements OnInit {
   private _searchTerm: string = '';
-  trackList: TrackSearchRow[] = [];
+  searchResult: SearchRow[] = [];
   isInputFocused: boolean = false;
   currentType: string = 'track';
   activeButton: string = 'track';
@@ -35,44 +38,66 @@ export class NavBarComponent implements OnInit {
   }
 
   async filterResults() {
-    // 1. Check if the search term is empty
     if (this._searchTerm.trim() === '') {
-      this.trackList = [];
+      this.searchResult = [];
     } else {
-      // 2. Fetch tracks from the SpotifyService
-      const tracks = await this.spotifyService
+      let results: any[] | undefined = await this.spotifyService
         .search(this._searchTerm, this.currentType)
         .toPromise();
 
-      // 3. Check if tracks were found
-      if (tracks) {
-        // 4. Map the fetched tracks to TrackSearchRow objects
-        this.trackList = await Promise.all(
-          tracks.map(async (track) => {
-            // 4.1 Fetch album details using the album ID
-            const album = await this.spotifyService
-              .getAlbum(track.album)
-              .toPromise();
-            // 4.2 Fetch artist names using the artist IDs
-            const artistNames = await Promise.all(
-              track.artists.map(async (artistId) => {
-                const artist = await this.spotifyService
-                  .getArtist(artistId)
-                  .toPromise();
-                return artist?.name ?? '';
-              })
-            );
+      console.log('Filter results: ' + results);
 
-            console.log(JSON.stringify(album));
+      if (results) {
+        if (this.currentType === 'track') {
+          this.searchResult = await Promise.all(
+            (results as Track[]).map(async (track) => {
+              const album = await this.spotifyService
+                .getAlbum(track.album)
+                .toPromise();
+              const artistNames = await Promise.all(
+                track.artists.map(async (artistId) => {
+                  const artist = await this.spotifyService
+                    .getArtist(artistId)
+                    .toPromise();
+                  return artist?.name ?? '';
+                })
+              );
+              return {
+                mainText: track.name,
+                photo: album?.imageURL,
+                subText: artistNames,
+              } as SearchRow;
+            })
+          );
+        } else if (this.currentType === 'album') {
+          this.searchResult = await Promise.all(
+            (results as Album[]).map(async (album) => {
+              const artistNames = await Promise.all(
+                album.artists.map(async (artistId) => {
+                  const artist = await this.spotifyService
+                    .getArtist(artistId)
+                    .toPromise();
+                  return artist?.name ?? '';
+                })
+              );
+              return {
+                mainText: album.name,
+                photo: album.imageURL,
+                subText: artistNames,
+              } as SearchRow;
+            })
+          );
+        } else if (this.currentType === 'artist') {
+          this.searchResult = (results as Artist[]).map((artist) => {
             return {
-              trackName: track.name,
-              albumPhoto: album?.imageURL,
-              artists: artistNames,
-            } as TrackSearchRow;
-          })
-        );
+              mainText: artist.name,
+              photo: artist.imageUrl,
+              subText: [artist.followerCount.toLocaleString()],
+            } as SearchRow;
+          });
+        }
       } else {
-        this.trackList = [];
+        this.searchResult = [];
       }
     }
   }

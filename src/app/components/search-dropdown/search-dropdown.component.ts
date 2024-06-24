@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrackSearchRow } from '../../models/track.search.model';
+import { SearchRow } from '../../models/search.row.model';
 
 @Component({
   selector: 'app-search-dropdown',
@@ -10,7 +10,6 @@ import { TrackSearchRow } from '../../models/track.search.model';
   styleUrl: './search-dropdown.component.css',
 })
 export class SearchDropdownComponent {
-  @Input() items: TrackSearchRow[] = [];
-
-
+  @Input() items: SearchRow[] = [];
+  @Input() currentType: string = "";
 }
