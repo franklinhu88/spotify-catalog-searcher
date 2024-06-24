@@ -45,8 +45,6 @@ export class NavBarComponent implements OnInit {
         .search(this._searchTerm, this.currentType)
         .toPromise();
 
-      console.log('Filter results: ' + results);
-
       if (results) {
         if (this.currentType === 'track') {
           this.searchResult = await Promise.all(
