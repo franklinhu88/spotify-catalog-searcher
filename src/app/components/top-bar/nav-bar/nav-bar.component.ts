@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SearchRow } from '../../models/search.row.model';
-import { SpotifyService } from '../../services/spotify.service';
+import { SearchRow } from '../../../models/search.row.model';
+import { SpotifyService } from '../../../services/spotify.service';
 import { SearchDropdownComponent } from '../search-dropdown/search-dropdown.component';
-import { Track } from '../../models/track.model';
-import { Album } from '../../models/album.model';
-import { Artist } from '../../models/artist.model';
+import { Track } from '../../../models/track.model';
+import { Album } from '../../../models/album.model';
+import { Artist } from '../../../models/artist.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
   standalone: true,
-  imports: [FormsModule, SearchDropdownComponent, CommonModule],
+  imports: [FormsModule, SearchDropdownComponent, CommonModule, RouterLink],
 })
 export class NavBarComponent implements OnInit {
   private _searchTerm: string = '';
@@ -64,6 +65,7 @@ export class NavBarComponent implements OnInit {
                 mainText: track.name,
                 photo: album?.imageURL,
                 subText: artistNames,
+                id: track.id,
               } as SearchRow;
             })
           );
@@ -82,6 +84,7 @@ export class NavBarComponent implements OnInit {
                 mainText: album.name,
                 photo: album.imageURL,
                 subText: artistNames,
+                id: album.id,
               } as SearchRow;
             })
           );
@@ -91,6 +94,7 @@ export class NavBarComponent implements OnInit {
               mainText: artist.name,
               photo: artist.imageUrl,
               subText: [artist.followerCount.toLocaleString()],
+              id: artist.id,
             } as SearchRow;
           });
         }
@@ -109,7 +113,9 @@ export class NavBarComponent implements OnInit {
   }
 
   onBlur() {
-    this.isInputFocused = false;
+    setTimeout(() => {
+      this.isInputFocused = false;
+    }, 100);
   }
 
   setActiveButton(button: string) {

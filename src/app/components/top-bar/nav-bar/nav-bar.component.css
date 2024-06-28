@@ -27,6 +27,7 @@ header {
 .logo-image {
   max-height: 40px; /* Adjust height as needed */
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .search-section {

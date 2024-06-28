@@ -63,7 +63,6 @@ export class SpotifyService {
 
   public getAlbum(albumId: string): Observable<Album> {
     const url = `${this.apiUrl}v1/albums/${albumId}`;
-    console.log(url);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.accessToken}`,
     });
@@ -131,7 +130,6 @@ export class SpotifyService {
           });
         } else if (type === 'album') {
           const items = response.albums?.items || [];
-          console.log(items);
           return items
             .filter((item: any) => item.album_type === 'album')
             .map((item: any) => {

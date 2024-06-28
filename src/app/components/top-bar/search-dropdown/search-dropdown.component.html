@@ -1,6 +1,10 @@
 <div class="dropdown" *ngIf="items.length > 0">
   <ul>
-    <li *ngFor="let item of items" class="item-container">
+    <li
+      *ngFor="let item of items"
+      class="item-container"
+      [routerLink]="getRouterLink(item)"
+    >
       <div class="album-info">
         <img
           *ngIf="item.photo"
