@@ -1,1 +1,33 @@
-<p>album-page works!</p>
+<div class="album-page">
+  <div *ngIf="album">
+    <h1>{{ album.name }}</h1>
+    <div class="album-details">
+      <img [src]="album.imageURL" alt="{{ album.name }}" class="album-photo" />
+      <div class="album-meta">
+        <p>
+          <strong>Artists: </strong>
+          <span *ngFor="let artist of artistNames; let i = index">
+            <a [routerLink]="['/artist', album.artists[i]]">{{ artist }}</a>
+            <span *ngIf="i < artistNames.length - 1">, </span>
+          </span>
+        </p>
+        <p><strong># of Tracks: </strong> {{ tracks.length }}</p>
+        <p>
+          <strong>Popularity:</strong>
+          {{ getPopularityDescription(album.popularity) }}
+        </p>
+      </div>
+    </div>
+    <div class="track-list">
+      <h2>Tracks</h2>
+      <ul>
+        <li *ngFor="let track of tracks">
+          <a [routerLink]="['/track', track.id]">{{ track.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="!album">
+    <p>Loading album details...</p>
+  </div>
+</div>

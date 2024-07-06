@@ -1,0 +1,54 @@
+.track-page {
+  color: white;
+  background-color: #181818;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.track-details {
+  display: flex;
+  align-items: flex-start; /* Adjust alignment as needed */
+  margin-top: 20px;
+}
+
+.album-photo {
+  max-height: 150px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.details {
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+.album-details {
+  margin-top: 10px; /* Adjust spacing between album info and artist info */
+}
+
+.album-details a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.album-details a:hover {
+  text-decoration: underline;
+}
+
+.artist-info {
+  margin-top: 10px; /* Adjust spacing between artist info and explicit */
+}
+
+.artist-info a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.artist-info a:hover {
+  text-decoration: underline;
+}
+
+.track-meta {
+  margin-top: 10px; /* Adjust spacing between explicit and popularity */
+}

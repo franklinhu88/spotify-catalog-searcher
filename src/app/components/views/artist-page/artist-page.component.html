@@ -1,1 +1,19 @@
-<p>artist-page works!</p>
+<div class="artist-page">
+  <div *ngIf="artist">
+    <h1>{{ artist.name }}</h1>
+    <div class="artist-details">
+      <img
+        [src]="artist.imageUrl"
+        alt="{{ artist.name }}"
+        class="artist-photo"
+      />
+      <div class="artist-meta">
+        <p><strong>Followers:</strong> {{ artist.followerCount | number }}</p>
+        <p><strong>Popularity:</strong> {{ getPopularityDescription(artist.popularity) }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!artist">
+    <p>Loading artist details...</p>
+  </div>
+</div>

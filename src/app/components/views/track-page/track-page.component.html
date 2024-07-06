@@ -1,1 +1,37 @@
-<p>track-page works! currently on {{ track?.name }}</p>
+<div class="track-page">
+  <div *ngIf="track">
+    <h1>{{ track.name }}</h1>
+    <div class="track-details">
+      <div class="album-info" *ngIf="album">
+        <img
+          [src]="album.imageURL"
+          alt="{{ album.name }}"
+          class="album-photo"
+        />
+      </div>
+      <div class="details">
+        <div class="artist-info" *ngIf="artists.length > 0">
+          <strong>Artist{{ artists.length === 1 ? "" : "s" }}: </strong>
+          <span *ngFor="let artist of artists; let i = index">
+            <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a
+            ><span *ngIf="i < artists.length - 1">, </span>
+          </span>
+        </div>
+        <div class="album-details">
+          <strong>Album: </strong>
+          <a [routerLink]="['/album', album?.id]">{{ album?.name }}</a>
+        </div>
+        <div class="track-meta">
+          <p><strong>Explicit:</strong> {{ track.explicit ? "Yes" : "No" }}</p>
+          <p>
+            <strong>Popularity:</strong>
+            {{ getPopularityDescription(track.popularity) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!track">
+    <p>Loading track details...</p>
+  </div>
+</div>

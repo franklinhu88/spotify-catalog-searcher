@@ -9,6 +9,7 @@ import { catchError, Observable, map } from 'rxjs';
 import { Track } from '../models/track.model';
 import { Artist } from '../models/artist.model';
 import { Album } from '../models/album.model';
+import { INSPECT_MAX_BYTES } from 'buffer';
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +76,7 @@ export class SpotifyService {
           name: item.name,
           artists: item.artists.map((artist: any) => artist.id),
           tracks: item.tracks.items.map((track: any) => track.id),
+          popularity: item.popularity,
         } as Album;
       })
     );
@@ -90,7 +92,7 @@ export class SpotifyService {
       map((item) => {
         return {
           id: item.id,
-          imageUrl: item.images.url,
+          imageUrl: item.images[0]?.url ?? '',
           name: item.name,
           followerCount: item.followers.total,
           href: item.href,

@@ -1,0 +1,59 @@
+.album-page {
+  color: white;
+  background-color: #181818;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.album-details {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.album-photo {
+  max-height: 150px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.album-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-meta p {
+  margin: 5px 0;
+}
+
+.album-meta a {
+  color: #1db954;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.album-meta a:hover {
+  text-decoration: underline;
+}
+
+.track-list {
+  margin-top: 20px;
+}
+
+.track-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.track-list li {
+  margin: 5px 0;
+}
+
+.track-list a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.track-list a:hover {
+  text-decoration: underline;
+}
