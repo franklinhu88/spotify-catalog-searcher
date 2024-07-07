@@ -9,14 +9,14 @@ import { catchError, Observable, map } from 'rxjs';
 import { Track } from '../models/track.model';
 import { Artist } from '../models/artist.model';
 import { Album } from '../models/album.model';
-import { INSPECT_MAX_BYTES } from 'buffer';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpotifyService {
-  private clientId = 'eecd9a3eea024ecebf85f20d2b605da0';
-  private clientSecret = '1f2dd3303b6746f9aac2bd228e0fc0b9';
+  private clientId = environment.spotifyClientId;
+  private clientSecret = environment.spotifyClientSecret;
   public accessToken: string = '';
   private accountUrl = `https://accounts.spotify.com/api/`;
   private apiUrl = `https://api.spotify.com/`;
