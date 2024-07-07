@@ -5,4 +5,5 @@ export interface Artist {
   id: string;
   imageUrl: string;
   popularity: number;
+  genres: string[];
 }

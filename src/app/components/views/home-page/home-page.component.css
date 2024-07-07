@@ -1,0 +1,9 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #48484f; /* Uniform background color */
+  color: green; /* Text color */
+  text-align: center;
+}

@@ -21,7 +21,6 @@ export class NavBarComponent implements OnInit {
   searchResult: SearchRow[] = [];
   isInputFocused: boolean = false;
   currentType: string = 'track';
-  activeButton: string = 'track';
 
   constructor(private spotifyService: SpotifyService) {}
 
@@ -118,9 +117,8 @@ export class NavBarComponent implements OnInit {
     }, 100);
   }
 
-  setActiveButton(button: string) {
-    this.activeButton = button;
-    this.currentType = button;
+  onTypeChange(event: Event) {
+    this.currentType = (event.target as HTMLSelectElement).value;
     this.filterResults();
   }
 }

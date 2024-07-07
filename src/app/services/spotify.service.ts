@@ -77,6 +77,8 @@ export class SpotifyService {
           artists: item.artists.map((artist: any) => artist.id),
           tracks: item.tracks.items.map((track: any) => track.id),
           popularity: item.popularity,
+          trackCount: item.total_tracks,
+          genres: item.genres,
         } as Album;
       })
     );
@@ -97,6 +99,7 @@ export class SpotifyService {
           followerCount: item.followers.total,
           href: item.href,
           popularity: item.popularity,
+          genres: item.genres,
         } as Artist;
       })
     );
@@ -136,6 +139,7 @@ export class SpotifyService {
             .filter((item: any) => item.album_type === 'album')
             .map((item: any) => {
               return {
+                trackCount: item.total_tracks,
                 id: item.id,
                 imageURL: item.images[0].url ?? '',
                 name: item.name,

@@ -1,4 +1,3 @@
-<!-- src/app/components/search-bar/search-bar.component.html -->
 <header>
   <nav class="navbar">
     <!-- Logo and Home button -->
@@ -22,7 +21,15 @@
           (focus)="onFocus()"
           (blur)="onBlur()"
         />
-        <button class="search-button" (click)="onSearch()">Search</button>
+        <select
+          class="search-dropdown"
+          [(ngModel)]="currentType"
+          (change)="onTypeChange($event)"
+        >
+          <option value="album">Album</option>
+          <option value="artist">Artist</option>
+          <option value="track">Track</option>
+        </select>
         <app-search-dropdown
           *ngIf="searchResult.length > 0 && isInputFocused"
           [items]="searchResult"
@@ -31,29 +38,13 @@
       </div>
     </div>
 
-    <!-- Other navigation buttons -->
-    <div class="nav-buttons">
-      <button
-        class="nav-button"
-        [class.active]="activeButton === 'album'"
-        (click)="setActiveButton('album')"
-      >
-        Album
-      </button>
-      <button
-        class="nav-button"
-        [class.active]="activeButton === 'artist'"
-        (click)="setActiveButton('artist')"
-      >
-        Artist
-      </button>
-      <button
-        class="nav-button"
-        [class.active]="activeButton === 'track'"
-        (click)="setActiveButton('track')"
-      >
-        Track
-      </button>
+    <!-- Profile picture placeholder -->
+    <div class="profile-section">
+      <img
+        src="../../../assets/images/profile-picture-placeholder.jpg"
+        alt="Profile"
+        class="profile-image"
+      />
     </div>
   </nav>
 </header>

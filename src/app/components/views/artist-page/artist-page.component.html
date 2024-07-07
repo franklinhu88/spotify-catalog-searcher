@@ -9,7 +9,21 @@
       />
       <div class="artist-meta">
         <p><strong>Followers:</strong> {{ artist.followerCount | number }}</p>
-        <p><strong>Popularity:</strong> {{ getPopularityDescription(artist.popularity) }}</p>
+        <p>
+          <strong>Genres: </strong>
+          <span
+            *ngIf="artist.genres && artist.genres.length > 0; else noGenres"
+          >
+            <span *ngFor="let genre of artist.genres; let last = last"
+              >{{ genre }}<span *ngIf="!last">, </span></span
+            >
+          </span>
+          <ng-template #noGenres>None Listed</ng-template>
+        </p>
+        <p>
+          <strong>Popularity:</strong>
+          {{ getPopularityDescription(artist.popularity) }}
+        </p>
       </div>
     </div>
   </div>

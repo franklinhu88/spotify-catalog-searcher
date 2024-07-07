@@ -40,6 +40,7 @@ export class AlbumPage implements OnInit {
         this.album = album;
         this.fetchArtists(album.artists);
         this.fetchTracks(album.tracks);
+        console.log(this.album);
       },
       (error) => {
         console.error('Error fetching album:', error);
