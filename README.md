@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Personal Addition
+
+Test project to experiment with the Spotify Web API as well as creating applications with Angular. Don't judge the design, I'm not a UI/UX designer. Just wanted to play around a bit
