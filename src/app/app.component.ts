@@ -17,7 +17,6 @@ import { RouterModule } from '@angular/router';
 export class AppComponent implements OnInit {
   trackId: string = '';
   showSong: boolean = false;
-  pracID: string = '4Z8W4fKeB5YxbusRsdQVPb';
   artist: any;
   accessToken: string = '';
 
@@ -29,16 +28,5 @@ export class AppComponent implements OnInit {
 
   onTrackIdSubmit() {
     this.showSong = true;
-  }
-
-  testSearchTracks() {
-    this.spotifyService.getAlbum('1JzjwUKkPsdHg1SQ7qa5hc').subscribe(
-      (album: Album) => {
-        console.log('Search Tracks Result:', album);
-      },
-      (error) => {
-        console.error('Error fetching search tracks:', error);
-      }
-    );
   }
 }
